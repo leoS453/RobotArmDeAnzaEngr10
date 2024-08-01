@@ -40,13 +40,12 @@ void setup()
 }
 
 void loop() {
-  
+
   // Check to see if Serial data is being received
   if (Serial.available() > 0) {
     
     // Create a new string variable to receive Serial data
     String receivedString = "";
-    
     // Loop through received data and append to the receivedString variable
     while (Serial.available() > 0) {
       receivedString += Serial.readString();
@@ -54,12 +53,19 @@ void loop() {
     
     //kinda undoes the thing from before ill make this better later
     //char inputChar[receivedString.length()+1]= {receivedString.c_str()}; //this is like giving an error i think 
-    char inputChar[receivedString.length()+1] = new char[];
-    strcopy(inputChar, receivedString.c_str());
-
+    char* inputChar = new char[receivedString.length()+1];
+    strcpy(inputChar, receivedString.c_str());
+    Serial.println(inputChar);
     //goes through the array to find the strings for each command
     for(int i =0; i<sizeof(inputChar)/sizeof(inputChar[0]); i+=6){
-      Serial.print(receivedString);
+      Serial.println(receivedString);
+      Serial.println(inputChar[i+0]);
+      Serial.println(inputChar[i+1]);
+      Serial.println(inputChar[i+2]);
+      Serial.println(inputChar[i+3]);
+      Serial.println(inputChar[i+4]);
+      Serial.println(inputChar[i+5]);
+
       //ensures its reading it properly
       if(inputChar[i] != '!'){
         //bad
@@ -107,6 +113,7 @@ void loop() {
           break;
         case 'O':
           openClaw();
+          break;
 
         //control the led
         case 'L':
@@ -133,12 +140,12 @@ boolean moveServo(Servo servo, int degree){
   if(servo.read() == degree){
     //do nothing
   }else if(servo.read()>degree){
-    for(int i = servo.read()+1; i<=degree; i++){
+    for(int i = servo.read()-1; i>=degree; i--){
       servo.write(i);
       delay(timing);
     }
   }else{
-    for(int i = servo.read()-1; i>=degree; i--){
+    for(int i = servo.read()+1; i<=degree; i++){
       servo.write(i);
       delay(timing);
     }
@@ -151,8 +158,12 @@ boolean autoMove(char char1, char char2, char char3){
 }
 
 boolean closeClaw(){
-  moveServo(claw, 180);
+  claw.write(180);
+  //moveServo(claw, 180);
+  claw.write(180);
 }
 boolean openClaw(){
-  moveServo(claw, 90);
+  claw.write(0);
+  //moveServo(claw, 90);
+  claw.write(0);
 }
