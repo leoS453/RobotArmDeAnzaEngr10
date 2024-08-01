@@ -158,12 +158,8 @@ boolean autoMove(char char1, char char2, char char3){
 }
 
 boolean closeClaw(){
-  claw.write(180);
-  //moveServo(claw, 180);
-  claw.write(180);
+  moveServo(claw, 180);
 }
 boolean openClaw(){
-  claw.write(0);
-  //moveServo(claw, 90);
-  claw.write(0);
+  moveServo(claw, 90);
 }
