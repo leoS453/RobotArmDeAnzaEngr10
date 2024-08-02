@@ -165,3 +165,10 @@ boolean closeClaw(){
 boolean openClaw(){
   moveServo(claw, 90);
 }
+
+float baseservo(float z){
+   float angle = cos(radians(z));
+   if (angle >= 0 && angle <= 180){
+    moveServo(servo1, x);
+   }
+}
