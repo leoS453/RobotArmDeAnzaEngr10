@@ -13,6 +13,8 @@ Servo servo6;
 
 Servo claw; //specifically for the claw cause it has different controls 
 
+const float arms = 6.0;
+const float pi = 3.1415;
 
 //defines pin for led used for testing
 int pinNum = 10;
@@ -166,9 +168,24 @@ boolean openClaw(){
   moveServo(claw, 90);
 }
 
-float baseservo(float z){
-   float angle = cos(radians(z));
-   if (angle >= 0 && angle <= 180){
-    moveServo(servo1, x);
-   }
+
+
+void moveToAngle(float base, float angle1, float angle2){
+  //just the arm not the wrist or claw 
+  servo1.write(base);
+  servo2.write(angle1);
+  servo3.write(angle2);
+}
+
+void mainmover(float x, float y, float z){
+  float base = atan2(y, x) * (180/pi);
+  float hyonpot = sqrt(x * x + y * y); //pythagorean
+  float height = sqrt(hyonpot * hyonpot + z * z); 
+  float phi = atan(z/hyonpot) * (180/pi); \\horizontal angle
+  float theta = acos((hyonpoy / 2)/arms) * (180/pi);
+
+  float angle1 = phi + theta;
+  float angle2 = phi - theta;
+
+  moveToAngle(base, angle1, angle2);
 }
