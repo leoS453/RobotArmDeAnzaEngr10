@@ -90,29 +90,29 @@ void loop() {
        //control servo 1,2,3,4,5,6 individually
        char* str;
        case '1':
-         str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
-         moveServo(servo1, atoi(str));
+         int temp1 = stringToInt(inputChar[i+3],inputChar[i+4],inputChar[i+5]);
+         moveServo(servo1, temp1);
          Serial.write("works");
          break;
        case '2':
-         str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
-         moveServo(servo2, atoi(str));
+         int temp1 = stringToInt(inputChar[i+3],inputChar[i+4],inputChar[i+5]);
+         moveServo(servo2, temp1);
          break;
        case '3':
-         str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
-         moveServo(servo3, atoi(str));
+         int temp1 = stringToInt(inputChar[i+3],inputChar[i+4],inputChar[i+5]);
+         moveServo(servo3, temp1);
          break;
        case '4':
-         str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
-         moveServo(servo4, atoi(str));
+         int temp1 = stringToInt(inputChar[i+3],inputChar[i+4],inputChar[i+5]);
+         moveServo(servo4, temp1);
          break;
        case '5':
-         str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
-         moveServo(servo5, atoi(str));
+         int temp1 = stringToInt(inputChar[i+3],inputChar[i+4],inputChar[i+5]);
+         moveServo(servo5, temp1);
          break;
        case '6':
-         str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
-         moveServo(servo6, atoi(str));
+         int temp1 = stringToInt(inputChar[i+3],inputChar[i+4],inputChar[i+5]);
+         moveServo(servo6, temp1);
          break;
         
         //***************** Automatic Control **************
