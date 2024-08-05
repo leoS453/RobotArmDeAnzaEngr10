@@ -83,37 +83,37 @@ void loop() {
       if(inputChar[i] != '!'){
         //bad
       }
-      //finds what command
       switch(inputChar[i+1]){
-        //***************** Manual Control **************
+       //***************** Manual Control **************
 
-        //control servo 1,2,3,4,5,6 individually 
-        char* str;
-        case '1':
-          str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
-          moveServo(servo1, atoi(str));
-          Serial.write("works");
-          break;
-        case '2':
-          str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
-          moveServo(servo2, atoi(str));
-          break;
-        case '3':
-          str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
-          moveServo(servo3, atoi(str));
-          break;
-        case '4':
-          str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
-          moveServo(servo4, atoi(str));
-          break;
-        case '5':
-          str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
-          moveServo(servo5, atoi(str));
-          break;
-        case '6':
-          str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
-          moveServo(servo6, atoi(str));
-          break;
+
+       //control servo 1,2,3,4,5,6 individually
+       char* str;
+       case '1':
+         str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
+         moveServo(servo1, atoi(str));
+         Serial.write("works");
+         break;
+       case '2':
+         str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
+         moveServo(servo2, atoi(str));
+         break;
+       case '3':
+         str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
+         moveServo(servo3, atoi(str));
+         break;
+       case '4':
+         str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
+         moveServo(servo4, atoi(str));
+         break;
+       case '5':
+         str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
+         moveServo(servo5, atoi(str));
+         break;
+       case '6':
+         str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
+         moveServo(servo6, atoi(str));
+         break;
         
         //***************** Automatic Control **************
         case 'A':
@@ -212,4 +212,12 @@ boolean automove(char x, char y, char z){
 //converts an int in the x y or z into the correct floating dimension for autoMove
 float subChar(int x){
   return 0.5(x - 97);
+}
+
+int stringToInt(char char1, char char2, char char3){
+  int int1 = int(char1) - 48;
+  int int2 = int(char2) - 48;
+  int int3 = int(char3) - 48;
+
+  return int1*100+int2*10+int3;
 }
