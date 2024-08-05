@@ -35,7 +35,13 @@ void setup()
   servo6.attach(27);
 
   claw = servo6; //assumes the claw is servo6
-
+  servo1.write(0);
+  servo2.write(0);
+  servo3.write(0);
+  servo4.write(0);
+  servo5.write(0);
+  servo6.write(0);
+  claw.write(0);
   // Initialize the Serial
   Serial.begin(9600);
   
