@@ -164,10 +164,10 @@ boolean moveServo(Servo &servo, int degree){
 
 //automitcally moves the claw to correct location
 boolean closeClaw(){
-  moveServo(claw, 180); //close with torque
+  moveServo(claw, 50); //close with torque
 }
 boolean openClaw(){
-  moveServo(claw, 90); //open halfway
+  moveServo(claw, 0); //open halfway
 }
 
 //helper function for mainMover to move the 2 arm servos and base to the correct location

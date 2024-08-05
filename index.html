@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html >
     
-    <head  >
+    <head>
         <meta charset="UTF-8">   
         <title>Robot Arm</title>
         
         <!--Installs socket-->
+        <!--Assists in communication between the website and app.js-->
         <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
-
-        <!--This doesnt work. need to do something complicated. might just not-->
-        <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
     <body>
         
         <!--*****************Title*****************-->  
         <h1 style="text-align:center;">Communicating from Node.js to an Arduino Prototype</h1>
-        <p style="text-align:center;">Project members: Aiden, Leo, Neil, Douglas, Brandon</p>
+        <p style="text-align:center;">Project members: Aiden, Leo, Neal, Douglas, Brandon</p>
 
         <!--*****************Macro Controls*****************-->
         <h2>Macro Control</h2>
         <h3>Arm Control</h3>
+
+        <!--3 text boxes for submission-->
 
         <div style="float: left;"> 
             <label for="X">X:</label>
@@ -39,6 +39,7 @@
         <div style="clear: both">
             <button id="submit">Submit</button>
             </div>
+        <!--Activates the event to read the text boxes-->
 
         <!--*****************Claw Controls*****************-->
         <h3>Claw Control</h3>
@@ -124,6 +125,7 @@
 
             socket.emit('dataIn', { "status":"!A:" +xStr+yStr+zStr});   
         };
+        //code for text boxes
 
 
         //***************** Claw Control Code **************
