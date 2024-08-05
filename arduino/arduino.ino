@@ -13,6 +13,7 @@ Servo servo6;
 
 Servo claw; //specifically for the claw cause it has different controls 
 
+//math constants for calculating the arm positon in space
 const float arms = 6.0;
 const float pi = 3.1415;
 
@@ -53,13 +54,15 @@ void loop() {
       receivedString += Serial.readString();
     }
     
-    //kinda undoes the thing from before ill make this better later
-    //char inputChar[receivedString.length()+1]= {receivedString.c_str()}; //this is like giving an error i think 
+    //converts the string into a char list 
     char* inputChar = new char[receivedString.length()+1];
     strcpy(inputChar, receivedString.c_str());
-    Serial.println(inputChar);
+    
+    //Serial.println(inputChar); //for testing
+
     //goes through the array to find the strings for each command
     for(int i =0; i<sizeof(inputChar)/sizeof(inputChar[0]); i+=6){
+      /*
       Serial.println(receivedString);
       Serial.println(inputChar[i+0]);
       Serial.println(inputChar[i+1]);
@@ -67,6 +70,8 @@ void loop() {
       Serial.println(inputChar[i+3]);
       Serial.println(inputChar[i+4]);
       Serial.println(inputChar[i+5]);
+      */
+     //for testing
 
       //ensures its reading it properly
       if(inputChar[i] != '!'){
@@ -129,7 +134,7 @@ void loop() {
     }
 
     // Print received Serial data
-    //Serial.println(receivedString);
+    //Serial.println(receivedString); //for testing
     
   }
 
@@ -157,19 +162,15 @@ boolean moveServo(Servo &servo, int degree){
   return true;
 }
 
-boolean autoMove(char char1, char char2, char char3){
-  return true; 
-}
-
+//automitcally moves the claw to correct location
 boolean closeClaw(){
-  moveServo(claw, 180);
+  moveServo(claw, 180); //close with torque
 }
 boolean openClaw(){
-  moveServo(claw, 90);
+  moveServo(claw, 90); //open halfway
 }
 
-
-
+//helper function for mainMover to move the 2 arm servos and base to the correct location
 void moveToAngle(float base, float angle1, float angle2){
   //just the arm not the wrist or claw 
   servo1.write(base);
@@ -177,7 +178,8 @@ void moveToAngle(float base, float angle1, float angle2){
   servo3.write(angle2);
 }
 
-void mainmover(float x, float y, float z){
+//based on a position in 3d space calculates the angles that the servos need to move to work
+void mainMover(float x, float y, float z){
   float base = atan2(y, x) * (180/pi);
   float hyonpot = sqrt(x * x + y * y); //pythagorean
   float height = sqrt(hyonpot * hyonpot + z * z); 
@@ -188,4 +190,20 @@ void mainmover(float x, float y, float z){
   float angle2 = phi - theta;
 
   moveToAngle(base, angle1, angle2);
+}
+
+//coverts the input to int locations in space and feeds them to mainMover
+boolean automove(char x, char y, char z){
+  int xInt = int(x);
+  int yInt = int(y);
+  int zInt = int(z);
+
+  mainMover(subChar(xInt), subChar(yInt), subChar(zInt));
+  return true;
+}
+
+//helper function for autoMove
+//converts an int in the x y or z into the correct floating dimension for autoMove
+float subChar(int x){
+  return 0.5(x - 97);
 }

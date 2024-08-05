@@ -19,6 +19,26 @@
 
         <!--*****************Macro Controls*****************-->
         <h2>Macro Control</h2>
+        <h3>Arm Control</h3>
+
+        <div style="float: left;"> 
+            <label for="X">X:</label>
+            <input type="text" id="X" name="X">   
+        </div>
+
+        <div style="float: left;"> 
+            <label for="X">Y:</label>
+            <input type="text" id="Y" name="Y">   
+        </div>
+
+        <div style="float: left;"> 
+            <label for="X">Z:</label>
+            <input type="text" id="Z" name="Z">   
+        </div>
+
+        <div style="clear: both">
+            <button id="submit">Submit</button>
+            </div>
 
         <!--*****************Claw Controls*****************-->
         <h3>Claw Control</h3>
@@ -96,6 +116,15 @@
         <!--***************** Code **************-->
         <script>
         var socket = io();
+
+        document.getElementById('submit').onclick = function() {
+            xStr = document.getElementById('X').value;
+            yStr = document.getElementById('Y').value;
+            zStr = document.getElementById('Z').value;
+
+            socket.emit('dataIn', { "status":"!A:" +xStr+yStr+zStr});   
+        };
+
 
         //***************** Claw Control Code **************
         document.getElementById('openClaw').onclick = function() {
