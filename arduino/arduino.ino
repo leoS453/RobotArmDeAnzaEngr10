@@ -149,7 +149,7 @@ void loop() {
 //moves servo in a less violent way
 boolean moveServo(Servo &servo, int degree){
   const int timing = 10;
-  currentpos = servo.read();
+  int currentpos = servo.read();
   if(currentpos== degree){
     //do nothing
     return true;
@@ -189,8 +189,8 @@ void mainMover(float x, float y, float z){
   float base = atan2(y, x) * (180/pi);
   float hyonpot = sqrt(x * x + y * y); //pythagorean
   float height = sqrt(hyonpot * hyonpot + z * z); 
-  float phi = atan(z/hyonpot) * (180/pi); \\horizontal angle
-  float theta = acos((hyonpoy / 2)/arms) * (180/pi);
+  float phi = atan(z/hyonpot) * (180/pi); //horizontal angle
+  float theta = acos((hyonpot / 2)/arms) * (180/pi);
 
   float angle1 = phi + theta;
   float angle2 = phi - theta;
@@ -211,7 +211,7 @@ boolean automove(char x, char y, char z){
 //helper function for autoMove
 //converts an int in the x y or z into the correct floating dimension for autoMove
 float subChar(int x){
-  return 0.5(x - 97);
+  return 0.5*(x - 97);
 }
 
 int stringToInt(char char1, char char2, char char3){
