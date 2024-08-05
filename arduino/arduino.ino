@@ -28,12 +28,12 @@ void setup()
   //sets pins for servo objects
   //set as sequential order starting from the first digital pin
   //might be better to use just the outer ones
-  servo1.attach(22);
-  servo2.attach(23);
-  servo3.attach(24);
-  servo4.attach(25);
+  servo1.attach(9);
+  servo2.attach(10);
+  servo3.attach(11);
+  servo4.attach(8);
   servo5.attach(26);
-  servo6.attach(27);
+  servo6.attach(7);
 
   claw = servo6; //assumes the claw is servo6
   servo1.write(0);
