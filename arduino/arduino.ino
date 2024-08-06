@@ -91,8 +91,10 @@ void loop() {
        char* str;
        case '1':
          int temp1 = stringToInt(inputChar[i+3],inputChar[i+4],inputChar[i+5]);
-         moveServo(servo1, temp1);
+         //moveServo(servo1, temp1);
+         servo1.write(temp1);
          Serial.write("works");
+         Serial.write(0);
          break;
        case '2':
          int temp1 = stringToInt(inputChar[i+3],inputChar[i+4],inputChar[i+5]);
@@ -173,7 +175,7 @@ boolean closeClaw(){
   moveServo(claw, 50); //close with torque
 }
 boolean openClaw(){
-  moveServo(claw, 0); //open halfway
+  moveServo(claw, 10); //open halfway
 }
 
 //helper function for mainMover to move the 2 arm servos and base to the correct location
